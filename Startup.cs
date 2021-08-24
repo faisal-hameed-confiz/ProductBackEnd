@@ -6,16 +6,21 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using ProductBackEnd.Data;
+using ProductBackEnd.Services.ProductService;
 
 namespace ProductBackEnd
 {
     public class Startup
     {
+        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -26,12 +31,27 @@ namespace ProductBackEnd
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            
+            services.AddCors(options =>
+        {
+            options.AddPolicy(name: MyAllowSpecificOrigins,
+                              builder =>
+                              {
+                                  builder.WithOrigins("http://localhost:4200");
+                              });
+        });
 
+            services.AddDbContext<InventoryContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ProductBackEnd", Version = "v1" });
             });
+
+            services.AddAutoMapper(typeof(Startup));
+            services.AddScoped<IProductService, ProductService>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,7 +67,9 @@ namespace ProductBackEnd
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
+            
+            app.UseCors(MyAllowSpecificOrigins);
+            
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
