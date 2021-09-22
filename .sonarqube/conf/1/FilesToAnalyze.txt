@@ -1,0 +1,12 @@
+﻿/Users/faisalhameed/Desktop/ADF/DotNet/ProductBackendTest/ConstantsTest.cs
+/Users/faisalhameed/Desktop/ADF/DotNet/ProductBackendTest/IntegrationTest/IntegrationTest.cs
+/Users/faisalhameed/Desktop/ADF/DotNet/ProductBackendTest/IntegrationTest/ProductControllerIntegrationTest.cs
+/Users/faisalhameed/Desktop/ADF/DotNet/ProductBackendTest/ProductControllerTest.cs
+/Users/faisalhameed/Desktop/ADF/DotNet/ProductBackendTest/ProductServiceTest.cs
+/Users/faisalhameed/.nuget/packages/microsoft.net.test.sdk/16.9.4/build/netcoreapp2.1/Microsoft.NET.Test.Sdk.Program.cs
+/Users/faisalhameed/.nuget/packages/microsoft.testplatform.testhost/16.9.4/build/netcoreapp2.1/Microsoft.TestPlatform.PlatformAbstractions.dll
+/Users/faisalhameed/.nuget/packages/xunit.runner.visualstudio/2.4.3/build/netcoreapp2.1/xunit.runner.visualstudio.dotnetcore.testadapter.dll
+/Users/faisalhameed/.nuget/packages/xunit.runner.visualstudio/2.4.3/build/netcoreapp2.1/xunit.runner.reporters.netcoreapp10.dll
+/Users/faisalhameed/.nuget/packages/xunit.runner.visualstudio/2.4.3/build/netcoreapp2.1/xunit.runner.utility.netcoreapp10.dll
+/Users/faisalhameed/Desktop/ADF/DotNet/ProductBackendTest/.DS_Store
+/Users/faisalhameed/Desktop/ADF/DotNet/ProductBackendTest/coverage.opencover.xml

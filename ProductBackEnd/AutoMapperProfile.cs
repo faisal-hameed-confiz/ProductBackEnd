@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using AutoMapper;
 using ProductBackEnd.Dtos.Product;
 using ProductBackEnd.Models;
@@ -8,8 +9,9 @@ namespace ProductBackEnd
     {
         public AutoMapperProfile()
         {
-            CreateMap<Product, GetProductDto>();
+            CreateMap<Product, GetProductDto>();       
             CreateMap<AddProductDto, Product>();
+            CreateMap<UpdateProductDto, Product>();
         }
     }
 }

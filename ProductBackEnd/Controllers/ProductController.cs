@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ProductBackEnd.Dtos.Product;
@@ -20,8 +19,8 @@ namespace ProductBackEnd.Controllers
         }
 
         [HttpGet]
-        [Route("get-detail")]
-        public async Task<ActionResult<ServiceResponse<GetProductDto>>> GetSingleProduct([FromQuery(Name = "prodId")] int prodId)
+        [Route(ApiRoutes.GetDetail)]
+        public async Task<ActionResult<ServiceResponse<GetProductDto>>> GetSingleProduct([FromQuery(Name = "productId")] int prodId)
         {
             var serviceResponse = await _productService.GetProductById(prodId);
 
@@ -33,20 +32,22 @@ namespace ProductBackEnd.Controllers
         }
 
         [HttpGet]
+        [Route(ApiRoutes.GetAll)]
         public async Task<ActionResult<ServiceResponse<List<GetProductDto>>>> AllProducts()
         {
             return Ok(await _productService.GetAllProducts());
         }
 
         [HttpPost]
+        [Route(ApiRoutes.CreateProduct)]
         public async Task<ActionResult<ServiceResponse<List<GetProductDto>>>> AddProduct(AddProductDto newProduct)
         {
             return Ok(await _productService.AddProduct(newProduct));
         }
 
         [HttpPut]
-        [Route("update-product")]
-        public async Task<ActionResult<ServiceResponse<GetProductDto>>> UpdateProduct([FromQuery(Name = "prodId")] int prodId, UpdateProductDto updateProduct) {
+        [Route(ApiRoutes.UpdateProduct)]
+        public async Task<ActionResult<ServiceResponse<GetProductDto>>> UpdateProduct([FromQuery(Name = "productId")] int prodId, UpdateProductDto updateProduct) {
 
             var serviceResponse = await _productService.UpdateProduct(prodId, updateProduct);
 
@@ -58,8 +59,8 @@ namespace ProductBackEnd.Controllers
         }
 
         [HttpDelete]
-        [Route("delete-product")]
-        public async Task<ActionResult<ServiceResponse<List<GetProductDto>>>> DeleteProudct([FromQuery(Name = "prodId")] int prodId) {
+        [Route(ApiRoutes.DeleteProduct)]
+        public async Task<ActionResult<ServiceResponse<List<GetProductDto>>>> DeleteProudct([FromQuery(Name = "productId")] int prodId) {
 
             var serviceResponse = await _productService.DeleteProduct(prodId);
             
