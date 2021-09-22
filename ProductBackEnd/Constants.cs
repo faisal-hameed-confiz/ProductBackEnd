@@ -14,5 +14,6 @@
         public const string CreateProduct = "create-product";
         public const string UpdateProduct = "update-product";
         public const string DeleteProduct = "delete-product";
+        public const string GetStatus = "get-status";
     }
 }
