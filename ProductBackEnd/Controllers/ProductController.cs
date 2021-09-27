@@ -75,7 +75,7 @@ namespace ProductBackEnd.Controllers
         [Route(ApiRoutes.GetStatus)]
         public ActionResult<string> GetStatus()
         {
-            return Ok("Site is up and running");
+            return Ok("Site is up and running!!!");
         }
     }
 }
