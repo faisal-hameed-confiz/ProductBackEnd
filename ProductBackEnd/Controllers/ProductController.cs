@@ -8,7 +8,7 @@ using ProductBackEnd.Services.ProductService;
 namespace ProductBackEnd.Controllers
 {
     [ApiController]
-    [Route("/api/products")]
+    [Route("/products")]
     public class ProductController : ControllerBase
     {
         private readonly IProductService _productService;
@@ -18,11 +18,10 @@ namespace ProductBackEnd.Controllers
             _productService = productService;
         }
 
-        [HttpGet]
-        [Route(ApiRoutes.GetDetail)]
-        public async Task<ActionResult<ServiceResponse<GetProductDto>>> GetSingleProduct([FromQuery(Name = "productId")] int prodId)
+        [HttpGet("{productId}")]        
+        public async Task<ActionResult<ServiceResponse<GetProductDto>>> GetSingleProduct(int productId)
         {
-            var serviceResponse = await _productService.GetProductById(prodId);
+            var serviceResponse = await _productService.GetProductById(productId);
 
             if(serviceResponse.Data == null) {
                 return NotFound(serviceResponse);
@@ -31,51 +30,44 @@ namespace ProductBackEnd.Controllers
             return Ok(serviceResponse);
         }
 
-        [HttpGet]
-        [Route(ApiRoutes.GetAll)]
+        [HttpGet]        
         public async Task<ActionResult<ServiceResponse<List<GetProductDto>>>> AllProducts()
         {
             return Ok(await _productService.GetAllProducts());
         }
 
-        [HttpPost]
-        [Route(ApiRoutes.CreateProduct)]
+        [HttpPost]        
         public async Task<ActionResult<ServiceResponse<List<GetProductDto>>>> AddProduct(AddProductDto newProduct)
         {
             return Ok(await _productService.AddProduct(newProduct));
         }
 
-        [HttpPut]
-        [Route(ApiRoutes.UpdateProduct)]
-        public async Task<ActionResult<ServiceResponse<GetProductDto>>> UpdateProduct([FromQuery(Name = "productId")] int prodId, UpdateProductDto updateProduct) {
-
-            var serviceResponse = await _productService.UpdateProduct(prodId, updateProduct);
-
-            if(serviceResponse.Data == null) {
-                return NotFound(serviceResponse);
-            }
-            
-            return Ok(serviceResponse);
-        }
-
-        [HttpDelete]
-        [Route(ApiRoutes.DeleteProduct)]
-        public async Task<ActionResult<ServiceResponse<List<GetProductDto>>>> DeleteProudct([FromQuery(Name = "productId")] int prodId) {
-
-            var serviceResponse = await _productService.DeleteProduct(prodId);
-            
-            if(serviceResponse.Data == null) {
-                return NotFound(serviceResponse);
-            }
-
-            return Ok(serviceResponse);
-        }
-
-        [HttpGet]
-        [Route(ApiRoutes.GetStatus)]
-        public ActionResult<string> GetStatus()
+        [HttpPut("{productId}")]
+        public async Task<ActionResult<ServiceResponse<GetProductDto>>> UpdateProduct(int productId, UpdateProductDto updateProduct)
         {
-            return Ok("Site is up and running!!!");
+
+            var serviceResponse = await _productService.UpdateProduct(productId, updateProduct);
+
+            if (serviceResponse.Data == null)
+            {
+                return NotFound(serviceResponse);
+            }
+
+            return Ok(serviceResponse);
+        }
+
+        [HttpDelete("{productId}")]        
+        public async Task<ActionResult<ServiceResponse<List<GetProductDto>>>> DeleteProudct(int productId)
+        {
+
+            var serviceResponse = await _productService.DeleteProduct(productId);
+
+            if (serviceResponse.Data == null)
+            {
+                return NotFound(serviceResponse);
+            }
+
+            return Ok(serviceResponse);
         }
     }
 }

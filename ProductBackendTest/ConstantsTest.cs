@@ -23,7 +23,7 @@
 
     public static class ApiRoutesTest
     {
-        public const string Base = "/api/products";
+        public const string Base = "/products/";
 
         public const string GetDetail = "get-detail";
         public const string GetAll = "get-all";

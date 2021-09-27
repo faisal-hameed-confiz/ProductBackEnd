@@ -15,7 +15,7 @@ namespace ProductBackendTest.IntegrationTest
         [Fact]
         public async Task GetAllProducts()
         {
-            var route = ApiRoutesTest.Base + "/" + ApiRoutesTest.GetAll;
+            var route = ApiRoutesTest.Base;
 
             var response = await _client.GetAsync(requestUri: route);
             var responseProducts = await response.Content.ReadAsStringAsync();
@@ -29,7 +29,7 @@ namespace ProductBackendTest.IntegrationTest
         [Fact]
         public async Task CreateProduct()
         {
-            var route = ApiRoutesTest.Base + "/" + ApiRoutesTest.GetAll;
+            var route = ApiRoutesTest.Base;
 
             var response = await _client.GetAsync(requestUri: route);
             var responseProducts = await response.Content.ReadAsStringAsync();
@@ -38,8 +38,8 @@ namespace ProductBackendTest.IntegrationTest
 
             int numberOfProducts = serviceResponse.Data.Count;
 
-            var routeCreate = ApiRoutesTest.Base + "/" + ApiRoutesTest.CreateProduct;
-            var routeGetAll = ApiRoutesTest.Base + "/" + ApiRoutesTest.GetAll;
+            var routeCreate = ApiRoutesTest.Base;
+            var routeGetAll = ApiRoutesTest.Base;
 
             var res = await _client.PostAsJsonAsync(requestUri: routeCreate, new AddProductDto
             {
@@ -63,7 +63,7 @@ namespace ProductBackendTest.IntegrationTest
         [Fact]
         public async Task GetProductById()
         {
-            var routeGetById = ApiRoutesTest.Base + "/" + ApiRoutesTest.GetDetail + "?productId=1";
+            var routeGetById = ApiRoutesTest.Base + "1";
 
             var response = await _client.GetAsync(requestUri: routeGetById);            
             var responseProducts = await response.Content.ReadAsStringAsync();
@@ -81,7 +81,7 @@ namespace ProductBackendTest.IntegrationTest
         [Fact]
         public async Task GetProductForInvalidId()
         {
-            var routeGetById = ApiRoutesTest.Base + "/" + ApiRoutesTest.GetDetail + "?productId=-1";
+            var routeGetById = ApiRoutesTest.Base + "-1";
 
             var response = await _client.GetAsync(requestUri: routeGetById);
             var responseProducts = await response.Content.ReadAsStringAsync();
@@ -95,7 +95,7 @@ namespace ProductBackendTest.IntegrationTest
         [Fact]
         public async Task UpdateProduct()
         {
-            var routeUpdateProduct = ApiRoutesTest.Base + "/" + ApiRoutesTest.UpdateProduct + "?productId=2";
+            var routeUpdateProduct = ApiRoutesTest.Base + "2";
 
             var response = await _client.PutAsJsonAsync(requestUri: routeUpdateProduct, new UpdateProductDto
             {
@@ -125,7 +125,7 @@ namespace ProductBackendTest.IntegrationTest
         [Fact]
         public async Task UpdateProduct_ThatDoesnotExist()
         {
-            var routeUpdateProduct = ApiRoutesTest.Base + "/" + ApiRoutesTest.UpdateProduct + "?productId=-1";
+            var routeUpdateProduct = ApiRoutesTest.Base + "-1";
 
             var response = await _client.PutAsJsonAsync(requestUri: routeUpdateProduct, new UpdateProductDto());
 
@@ -141,7 +141,7 @@ namespace ProductBackendTest.IntegrationTest
         [Fact]
         public async Task DeleteProduct()
         {
-            var route = ApiRoutesTest.Base + "/" + ApiRoutesTest.GetAll;
+            var route = ApiRoutesTest.Base;
 
             var response = await _client.GetAsync(requestUri: route);
             var responseProducts = await response.Content.ReadAsStringAsync();
@@ -150,7 +150,7 @@ namespace ProductBackendTest.IntegrationTest
 
             int numberOfProducts = serviceResponse.Data.Count;
 
-            var routeDeleteProduct = ApiRoutesTest.Base + "/" + ApiRoutesTest.DeleteProduct + "?productId=3";
+            var routeDeleteProduct = ApiRoutesTest.Base + "3";
 
             response = await _client.DeleteAsync(requestUri: routeDeleteProduct);
 
@@ -167,7 +167,7 @@ namespace ProductBackendTest.IntegrationTest
         [Fact]
         public async Task DeleteProduct_ThatDoesnotExist()
         {
-            var routeDeleteProduct = ApiRoutesTest.Base + "/" + ApiRoutesTest.DeleteProduct + "?productId=-1";
+            var routeDeleteProduct = ApiRoutesTest.Base + "-1";
 
             var response = await _client.DeleteAsync(requestUri: routeDeleteProduct);
 
