@@ -16,4 +16,9 @@
         public const string DeleteProduct = "delete-product";
         public const string GetStatus = "get-status";
     }
+
+    public static class RequestParams
+    {
+        public const string ProductId = "{productId}";
+    }
 }

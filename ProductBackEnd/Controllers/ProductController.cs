@@ -18,7 +18,7 @@ namespace ProductBackEnd.Controllers
             _productService = productService;
         }
 
-        [HttpGet("{productId}")]        
+        [HttpGet(RequestParams.ProductId)]        
         public async Task<ActionResult<ServiceResponse<GetProductDto>>> GetSingleProduct(int productId)
         {
             var serviceResponse = await _productService.GetProductById(productId);
@@ -42,7 +42,7 @@ namespace ProductBackEnd.Controllers
             return Ok(await _productService.AddProduct(newProduct));
         }
 
-        [HttpPut("{productId}")]
+        [HttpPut(RequestParams.ProductId)]
         public async Task<ActionResult<ServiceResponse<GetProductDto>>> UpdateProduct(int productId, UpdateProductDto updateProduct)
         {
 
@@ -56,7 +56,7 @@ namespace ProductBackEnd.Controllers
             return Ok(serviceResponse);
         }
 
-        [HttpDelete("{productId}")]        
+        [HttpDelete(RequestParams.ProductId)]        
         public async Task<ActionResult<ServiceResponse<List<GetProductDto>>>> DeleteProudct(int productId)
         {
 
